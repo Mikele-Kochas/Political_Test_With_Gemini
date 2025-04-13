@@ -441,4 +441,8 @@ if __name__ == '__main__':
     # Remove debug run for production deployment
     # app.run(debug=True) 
     # Consider adding a simple print or placeholder if needed for local execution structure
-    pass # Or keep the block empty 
+    # pass # Or keep the block empty 
+    
+    # Configuration for Render deployment
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port) 
