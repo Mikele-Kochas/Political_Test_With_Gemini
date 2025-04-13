@@ -1,0 +1,6 @@
+gradio
+google-generativeai
+python-dotenv
+plotly
+Flask
+gunicorn 

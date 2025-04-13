@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %}Podsumowanie Poglądów{% endblock %}
+
+{% block head %}
+    {# No JS library needed #}
+{% endblock %}
+
+{% block content %}
+    <h1 class="display-5 mb-4 text-center">Podsumowanie Twoich Poglądów</h1>
+
+    <div class="row mb-5">
+        <div class="col-md-10 offset-md-1">
+            <div class="card shadow-sm">
+                <div class="card-header">Analiza Tekstowa</div>
+                <div class="card-body">
+                    {# Use lead class for slightly larger text #}
+                    <p class="lead" style="white-space: pre-wrap;">{{ summary_text }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+         <div class="col-md-10 offset-md-1">
+            <h2 class="text-center mb-4">Profil na Osiach</h2>
+            <div class="axes-container">
+                {% if axes_data and axes_data is iterable %}
+                    {% for axis in axes_data %}
+                    <div class="axis mb-4 p-3 bg-light border rounded">
+                        <h3 class="h5 text-center mb-3">{{ axis.axis_name }}</h3>
+                        <div class="axis-bar">
+                            <div class="axis-labels d-flex justify-content-between mb-1">
+                                <span class="label-left fw-bold">{{ axis.pole_left }}</span>
+                                <span class="label-right fw-bold">{{ axis.pole_right }}</span>
+                            </div>
+                            <div class="progress rounded-pill" style="height: 30px;">
+                                {# Swapped colors, removed text-dark, kept rounded-pill #}
+                                <div class="progress-bar bg-primary text-start ps-2" style="width: {{ 100 - axis.value_percent }}%;" title="{{ axis.pole_left }}: {{ (100 - axis.value_percent)|round(1) }}%">
+                                    {% if (100 - axis.value_percent) > 10 %}
+                                    {{ (100 - axis.value_percent)|round(1) }}%
+                                    {% endif %}
+                                </div>
+                                <div class="progress-bar bg-info text-end pe-2" style="width: {{ axis.value_percent }}%;" title="{{ axis.pole_right }}: {{ axis.value_percent|round(1) }}%">
+                                     {% if axis.value_percent > 10 %}
+                                     {{ axis.value_percent|round(1) }}%
+                                     {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="alert alert-warning" role="alert">
+                        Błąd ładowania danych wizualizacji lub brak danych.
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mt-5">
+        <a href="{{ url_for('index') }}" class="btn btn-secondary btn-lg">Wypełnij ponownie</a>
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+    {# No scripts needed for display, but keep block for potential future use #}
+{% endblock %} 
