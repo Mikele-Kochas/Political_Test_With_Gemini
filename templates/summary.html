@@ -3,14 +3,14 @@
 {% block title %}Podsumowanie Poglądów{% endblock %}
 
 {% block head %}
-    {# No JS library needed #}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 {% endblock %}
 
 {% block content %}
     <h1 class="display-5 mb-4 text-center">Podsumowanie Twoich Poglądów</h1>
 
-    <div class="row mb-5">
-        <div class="col-md-10 offset-md-1">
+    <div class="row mb-4">
+        <div class="col-lg-10 col-md-12 mx-auto">
             <div class="card shadow-sm">
                 <div class="card-header">Analiza Tekstowa</div>
                 <div class="card-body">
@@ -22,7 +22,7 @@
     </div>
 
     <div class="row mb-4">
-         <div class="col-md-10 offset-md-1">
+         <div class="col-lg-10 col-md-12 mx-auto">
             <h2 class="text-center mb-4">Profil na Osiach</h2>
             <div class="axes-container">
                 {% if axes_data and axes_data is iterable %}
@@ -37,12 +37,12 @@
                             <div class="progress rounded-pill" style="height: 30px;">
                                 {# Swapped colors, removed text-dark, kept rounded-pill #}
                                 <div class="progress-bar bg-primary text-start ps-2" style="width: {{ 100 - axis.value_percent }}%;" title="{{ axis.pole_left }}: {{ (100 - axis.value_percent)|round(1) }}%">
-                                    {% if (100 - axis.value_percent) > 10 %}
+                                    {% if (100 - axis.value_percent) > 15 %}
                                     {{ (100 - axis.value_percent)|round(1) }}%
                                     {% endif %}
                                 </div>
                                 <div class="progress-bar bg-info text-end pe-2" style="width: {{ axis.value_percent }}%;" title="{{ axis.pole_right }}: {{ axis.value_percent|round(1) }}%">
-                                     {% if axis.value_percent > 10 %}
+                                     {% if axis.value_percent > 15 %}
                                      {{ axis.value_percent|round(1) }}%
                                      {% endif %}
                                 </div>
@@ -59,12 +59,22 @@
         </div>
     </div>
 
-    <div class="text-center mt-5">
+    <div class="text-center mt-4 mb-5">
         <a href="{{ url_for('index') }}" class="btn btn-secondary btn-lg">Wypełnij ponownie</a>
     </div>
 
 {% endblock %}
 
 {% block scripts %}
-    {# No scripts needed for display, but keep block for potential future use #}
+    <script>
+        // Add tooltips on mobile for better understanding of the axes
+        document.addEventListener('DOMContentLoaded', function() {
+            const progressBars = document.querySelectorAll('.progress-bar');
+            progressBars.forEach(bar => {
+                bar.addEventListener('click', function() {
+                    alert(this.getAttribute('title'));
+                });
+            });
+        });
+    </script>
 {% endblock %} 

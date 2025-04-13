@@ -196,4 +196,84 @@ h1, h2, h3, h4, h5, h6, .navbar-brand, .display-4, .display-5 {
 /* Override standard progress bar color if needed elsewhere */
 .progress-bar.bg-info {
     background-color: var(--progress-bar-color) !important;
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+    body {
+        margin: 10px;
+    }
+
+    .container {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .hero-section {
+        padding: 2rem !important;
+    }
+
+    .hero-title {
+        font-size: 1.8rem !important;
+    }
+
+    .display-5 {
+        font-size: 1.8rem !important;
+    }
+
+    .fs-4 {
+        font-size: 1rem !important;
+    }
+
+    .card-header h2 {
+        font-size: 1rem;
+    }
+
+    .lead {
+        font-size: 1rem !important;
+    }
+
+    .form-check-label {
+        font-size: 0.9rem;
+    }
+
+    .btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    .axis h3 {
+        font-size: 1rem;
+    }
+
+    .axis-labels {
+        font-size: 0.8rem;
+    }
+
+    /* Make bars a bit shorter on mobile */
+    .progress {
+        height: 25px !important;
+    }
+
+    /* Adjust summary progress bars */
+    .progress-bar {
+        font-size: 0.8rem;
+    }
+}
+
+/* Even smaller screens */
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 1.5rem !important;
+    }
+
+    .display-5 {
+        font-size: 1.5rem !important;
+    }
+
+    .card-header h2 span.badge {
+        float: none !important;
+        display: block;
+        margin-top: 0.5rem;
+    }
 } 

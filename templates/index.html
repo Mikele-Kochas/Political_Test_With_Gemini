@@ -4,10 +4,10 @@
 
 {% block content %}
 {# Hero Section #}
-<div class="p-5 mb-4 bg-light rounded-3 shadow-sm hero-section">
-    <div class="container-fluid py-5">
+<div class="p-4 p-md-5 mb-4 bg-light rounded-3 shadow-sm hero-section">
+    <div class="container-fluid py-3 py-md-5">
         <h1 class="display-5 fw-bold hero-title">Odkryj Swój Kompas Polityczny</h1>
-        <p class="col-md-10 fs-4">Zrozum swoje poglądy w kluczowych obszarach debaty publicznej. Odpowiedz na serię pytań i otrzymaj spersonalizowaną analizę.</p>
+        <p class="col-12 col-md-10 fs-4">Zrozum swoje poglądy w kluczowych obszarach debaty publicznej. Odpowiedz na serię pytań i otrzymaj spersonalizowaną analizę.</p>
         {# Move button here for direct call to action #}
         <form action="{{ url_for('start') }}" method="post" class="mt-4">
             <button type="submit" class="btn btn-primary btn-lg">Rozpocznij Test &raquo;</button>
@@ -16,9 +16,9 @@
 </div>
 
 {# Detailed Info Section #}
-<div class="row justify-content-center mt-5">
-    <div class="col-lg-8">
-        <h2 class="text-center mb-4">Jak działa test?</h2>
+<div class="row justify-content-center mt-4">
+    <div class="col-lg-8 col-md-10 col-sm-12">
+        <h2 class="text-center mb-3">Jak działa test?</h2>
         <p>Test składa się z <strong>{{ total_questions if total_questions is defined else '?' }} pytań</strong> podzielonych na 5 głównych osi tematycznych:</p>
         <ul>
             <li>Polityka Gospodarcza (Wolność vs Równość)</li>
@@ -30,12 +30,12 @@
         <p>Twoje odpowiedzi pomogą nam określić Twoje położenie na każdej z tych osi oraz wygenerować opisowy profil Twoich poglądów, wskazując potencjalne ideologie, z którymi możesz rezonować.</p>
         <p class="text-muted small">Pytania są generowane dynamicznie przez model językowy na podstawie predefiniowanych tematów i zasad, starając się zapewnić różnorodność i głębię analizy.</p>
         <hr class="my-4 accent-hr">
-         <div class="text-center">
+         <div class="text-center mb-4">
              <p>Gotów sprawdzić, gdzie wskazują Twoje przekonania?</p>
-              {# Button can be repeated here or rely on the hero section button #}
-             {# <form action="{{ url_for('start') }}" method="post">
+              {# Dodajemy drugi przycisk dla mobilnych urządzeń #}
+             <form action="{{ url_for('start') }}" method="post">
                  <button type="submit" class="btn btn-primary">Rozpocznij Test</button>
-             </form> #}
+             </form>
          </div>
     </div>
 </div>
