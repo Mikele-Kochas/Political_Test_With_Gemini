@@ -2,6 +2,7 @@ import os
 import json
 import datetime # Import datetime
 from flask import Flask, render_template, request, redirect, url_for, session, flash
+from flask_session import Session
 from dotenv import load_dotenv
 import google.generativeai as genai
 import plotly.graph_objects as go
@@ -19,6 +20,31 @@ app = Flask(__name__)
 # IMPORTANT: Set a secret key for session management!
 # In a real app, use a strong, randomly generated key and store it securely.
 app.secret_key = os.getenv("FLASK_SECRET_KEY", "dev-secret-key-replace-in-prod")
+# Use memory-based session (for Render deployment)
+app.config['SESSION_TYPE'] = 'filesystem'
+app.config['SESSION_PERMANENT'] = False
+app.config['SESSION_USE_SIGNER'] = True
+app.config['SESSION_KEY_PREFIX'] = 'flask_session:'
+
+# Ensure the session directory exists and is writable
+session_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'flask_session')
+if not os.path.exists(session_dir):
+    try:
+        os.makedirs(session_dir)
+    except Exception as e:
+        print(f"Warning: Could not create session directory: {e}")
+        # Fall back to /tmp for session storage on Render
+        session_dir = '/tmp/flask_session'
+        if not os.path.exists(session_dir):
+            try:
+                os.makedirs(session_dir)
+            except Exception as e:
+                print(f"Warning: Could not create /tmp session directory: {e}")
+
+app.config['SESSION_FILE_DIR'] = session_dir
+
+# Initialize Flask-Session
+Session(app)
 
 # --- Inject current year into template context ---
 @app.context_processor

@@ -3,4 +3,5 @@ google-generativeai
 python-dotenv
 plotly
 Flask
-gunicorn 
+gunicorn
+Flask-Session 
